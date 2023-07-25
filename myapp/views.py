@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
 
 def index(request):
@@ -43,4 +43,16 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('myapp:index')
-
+    
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('book:index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'account/signup.html', {
+        'form':form,
+    })

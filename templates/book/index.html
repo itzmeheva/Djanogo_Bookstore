@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Book Page{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-2">1</div>
+    <div class="col-lg-10">
+        <h1>Book</h1>
+
+
+        <div class="row">
+            {% for b in books %}
+            <div class="col-lg-3">
+                <div class="card">
+                    <a href="#">
+                        <img src="{{ b.image.url }}" alt="" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h5><a href="#">{{ b.name }}</a></h5>
+                        <div>Category: {{ b.category.name }}</div>
+                        <div>Price: {{ b.price|floatformat:2 }}</div>
+                        <a href="#" class="btn btn-info mt-4">View detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

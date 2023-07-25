@@ -9,12 +9,12 @@ class BookTabularInline(admin.TabularInline):
     extra = 0
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'category', 'price', 'level', 'published']
+    list_display = ['code', 'name', 'category', 'price', 'level', 'published', 'show_image']
     list_filter = ['published']
     search_fields = ['code', 'name']
     prepopulated_fields = {'slug': ['name']}
     fieldsets = (
-        (None, {'fields': ['code', 'slug', 'name', 'description', 'level', 'price', 'published']}),
+        (None, {'fields': ['code', 'slug', 'name', 'description', 'level', 'image', 'price', 'published']}),
         ('Category', {'fields': ['category', 'author', ], 'classes': ['collapse']}),
     )
     inlines = [ BookTabularInline]
